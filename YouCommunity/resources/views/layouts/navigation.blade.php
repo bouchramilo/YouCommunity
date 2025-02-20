@@ -15,16 +15,20 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+
+                    <x-nav-link :href="route('show.allevents')" :active="request()->routeIs('show.allevents')">
                         {{ __('All Events') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+
+                    <x-nav-link :href="route('events.myEvents')" :active="request()->routeIs('events.myEvents')">
                         {{ __('My Events') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+
+                    <x-nav-link :href="route('events.create')" :active="request()->routeIs('events.create')">
                         {{ __('Create Event') }}
                     </x-nav-link>
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
@@ -34,7 +38,7 @@
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div class="w-10 h-10 border-0 rounded-full mx-1 bg-yellow-500"><img
-                                    src="{{ Auth::user()->photo }}" alt="photo personnel"
+                                    src="{{ asset('storage/' . Auth::user()->photo) }}" alt="photo personnel"
                                     class="w-10 h-10 border-0 rounded-full">
                             </div>
                             <div>{{ Auth::user()->name }}</div>
@@ -105,8 +109,9 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4 flex">
-                <div class="w-10 h-10 border-0 rounded-full mx-1 bg-yellow-500"><img src="{{ Auth::user()->photo }}"
-                        alt="photo personnel" class="w-10 h-10 border-0 rounded-full">
+                <div class="w-10 h-10 border-0 rounded-full mx-1 bg-yellow-500"><img
+                        src="{{ asset('storage/' . Auth::user()->photo) }}" alt="photo personnel"
+                        class="w-10 h-10 border-0 rounded-full">
                 </div>
                 <div>
                     <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}

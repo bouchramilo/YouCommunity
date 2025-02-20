@@ -1,9 +1,9 @@
 <x-guest-layout>
     <div class="text-center mb-8">
-        <h1 class="text-2xl font-bold text-[var(--text)]">{{ __('Créer un compte')}}</h1>
-        <p class="text-sm text-gray-600 mt-2" >{{ __('Rejoignez la communauté YouCommunity')}}</p>
+        <h1 class="text-2xl font-bold text-[var(--text)]">{{ __('Créer un compte') }}</h1>
+        <p class="text-sm text-gray-600 mt-2">{{ __('Rejoignez la communauté YouCommunity') }}</p>
     </div>
-    <form method="POST" action="{{ route('register') }}" class="space-y-6">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="space-y-6">
         @csrf
 
         <!-- Full Name Input -->
@@ -61,27 +61,29 @@
                     class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none" />
             </div>
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+            </div>
 
-        <!-- Photo Upload -->
-        <div>
-            <label for="photo" class="block text-sm font-medium text-[var(--text)] mb-2">
-                Photo de profil
-            </label>
-            <div class="mt-1 flex items-center">
-                <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                    <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                        <path
+            <!-- Photo Upload -->
+            <div>
+                <label for="photo" class="block text-sm font-medium text-[var(--text)] mb-2">
+                    Photo de profil
+                </label>
+                <div class="mt-1 flex items-center">
+                    <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                        <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path
                             d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                </span>
-                <label for="file-upload" class="ml-5 cursor-pointer">
-                    <span
+                        </svg>
+                    </span>
+                    <label for="file-upload" class="ml-5 cursor-pointer">
+                        <span
                         class="px-4 py-2 text-sm font-medium text-white bg-[var(--primary)] rounded-lg hover:bg-[var(--accent)] transition duration-300">
                         Choisir une photo
                     </span>
-                    <input id="file-upload" name="file-upload" type="file" class="sr-only" accept="image/*">
+                    <input id="file-upload" type="file" name="photo" required class="sr-only"
+                    >
                 </label>
+                <x-input-error :messages="$errors->get('photo')" class="mt-2" />
             </div>
         </div>
 

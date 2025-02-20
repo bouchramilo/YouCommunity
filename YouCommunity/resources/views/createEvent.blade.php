@@ -18,7 +18,8 @@
                                 <p class="text-sm text-gray-600 mt-2">Partagez votre événement avec la communauté</p>
                             </div>
 
-                            <form class="space-y-6">
+                            <form action="{{ route('event.create') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
+                                @csrf
                                 <!-- Titre -->
                                 <div>
                                     <label for="title" class="block text-sm font-medium text-[var(--text)] mb-2">
@@ -41,7 +42,7 @@
                                         Description
                                     </label>
                                     <textarea id="description" name="description" rows="4"
-                                        class="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none"
+                                        class="block w-full p-3 border resize-none border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none"
                                         placeholder="Décrivez votre événement..."></textarea>
                                 </div>
 
@@ -55,7 +56,7 @@
                                             class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <i class="fas fa-calendar text-gray-400"></i>
                                         </div>
-                                        <input type="datetime-local" id="event_date" name="event_date"
+                                        <input type="datetime-local" id="event_date" name="dateHeure"
                                             class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
                                     </div>
                                 </div>
@@ -71,7 +72,7 @@
                                             class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <i class="fas fa-users text-gray-400"></i>
                                         </div>
-                                        <input type="number" id="max_participants" name="max_participants"
+                                        <input type="number" id="max_participants" name="maxParticipants"
                                             min="1"
                                             class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none"
                                             placeholder="Ex: 50">
@@ -88,7 +89,7 @@
                                             class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <i class="fas fa-map-marker-alt text-gray-400"></i>
                                         </div>
-                                        <input type="text" id="location" name="location"
+                                        <input type="text" id="location" name="lieu"
                                             class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none"
                                             placeholder="Ex: 123 rue de Paris, 75001 Paris">
                                     </div>
@@ -104,7 +105,7 @@
                                             class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <i class="fas fa-tag text-gray-400"></i>
                                         </div>
-                                        <select id="category" name="category"
+                                        <select id="category" name="categorie"
                                             class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
                                             <option value="">Sélectionnez une catégorie</option>
                                             <option value="music">Musique</option>
@@ -133,7 +134,7 @@
                                                 <label for="file-upload"
                                                     class="relative cursor-pointer bg-white rounded-md font-medium text-[var(--accent)] hover:text-[var(--primary)]">
                                                     <span>Télécharger un fichier</span>
-                                                    <input id="file-upload" name="file-upload" type="file"
+                                                    <input id="file-upload" name="photo" type="file"
                                                         class="sr-only" accept="image/*">
                                                 </label>
                                                 <p class="pl-1">ou glisser-déposer</p>

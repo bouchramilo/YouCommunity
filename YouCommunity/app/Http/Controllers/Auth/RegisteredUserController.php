@@ -31,14 +31,19 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Validation de l'image
         ]);
+
+        // Stocker la photo dans le dossier `public/photos`
+        $photoPath = $request->file(key: 'photo')->store('photos', 'public');
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'photo' => $photoPath, // Enregistrer le chemin de la photo
         ]);
 
         event(new Registered($user));
