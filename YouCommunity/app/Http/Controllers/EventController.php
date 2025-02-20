@@ -65,12 +65,13 @@ class EventController extends Controller
 
         return view('mesEventsCreate', compact('events'));
     }
+
     /**
      * Display the specified resource.
      */
     public function show(Event $event)
     {
-    return view('detailsEvent', compact('event'));
+        return view('detailsEvent', compact('event'));
     }
 
     /**
@@ -78,7 +79,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        return view('editEvent', compact('event'));
     }
 
     /**
@@ -94,6 +95,12 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        if (Auth::id() !== $event->user_id) {
+            return redirect()->route('events.myEvents')->with('error', "Vous n'avez pas le droit de supprimer cet événement.");
+        }
+
+        $event->delete();
+
+        return redirect()->route('events.myEvents')->with('success', 'Événement supprimé (archivé) avec succès.');
     }
 }

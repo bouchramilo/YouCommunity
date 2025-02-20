@@ -126,13 +126,19 @@
                                                                 class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                                 <i class="fas fa-envelope mr-1"></i>Voir les invitations
                                                             </a>
-                                                            <a href="#"
+                                                            <a href="/event/edit/{{ $event->id }}"
                                                                 class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                                 <i class="fas fa-edit mr-1"></i>Modifier
                                                             </a>
-                                                            <button class="text-red-500 hover:text-red-700 text-sm">
-                                                                <i class="fas fa-trash-alt mr-1"></i>Supprimer
-                                                            </button>
+                                                            <form action="{{ route('event.delete', $event->id) }}"
+                                                                method="POST"
+                                                                onsubmit="return confirm('Cette action est irréversible. Supprimer définitivement ?');">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="text-red-500 hover:text-red-700 text-sm">
+                                                                    <i class="fas fa-trash-alt mr-1"></i>Supprimer
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -30,9 +30,6 @@ Route::get('/allevents', function () {
     return view('allEvents');
 })->middleware(['auth', 'verified'])->name('show.allevents');
 
-// Route::get('/myEvents', function () {
-//     return view('mesEventsCreate');
-// })->middleware(['auth', 'verified'])->name('events.myEvents');
 
 
 
@@ -40,7 +37,9 @@ Route::get('/allevents', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::post('event/create', [EventController::class, 'store'])->name('event.create');
     Route::get('/myEvents', [EventController::class, 'showMyEvents'])->name('events.myEvents');
+    Route::post('event/create', [EventController::class, 'store'])->name('event.create');
+    Route::get('event/edit/{event}', [EventController::class, 'edit'])->name('event.edit');
+    Route::delete('event/delete/{event}', [EventController::class, 'destroy'])->name('event.delete');
     Route::get('/detailsEvent/{event}', [EventController::class, 'show'])->name('event.show');
 });
