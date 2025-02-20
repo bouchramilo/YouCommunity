@@ -14,12 +14,12 @@
                     <main class="flex-grow container mx-auto px-4 py-4">
                         <div class="max-w-5xl mx-auto">
                             <!-- Header Section -->
-                            <div class="flex justify-end items-center mb-8">
+                            {{-- <div class="flex justify-between items-center mb-8"> --}}
                                 <a href="/create-event"
                                     class="bg-[var(--primary)] text-white px-6 py-2 rounded-lg hover:bg-[var(--accent)] transition duration-300">
                                     <i class="fas fa-plus mr-2"></i>Créer un événement
                                 </a>
-                            </div>
+                            {{-- </div> --}}
 
                             <!-- Stats Cards -->
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
