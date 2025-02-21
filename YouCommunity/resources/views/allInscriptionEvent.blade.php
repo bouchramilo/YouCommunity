@@ -18,22 +18,23 @@
                             <!-- Event Info -->
                             <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
                                 <div class="flex items-center gap-6">
-                                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30"
-                                        alt="Festival de Jazz" class="w-24 h-24 rounded-lg object-cover">
+                                    <img src="{{ asset('storage/' . $event->photo) }}" alt="{{ $event->title }}"
+                                        class="w-24 h-24 rounded-lg object-cover">
                                     <div>
-                                        <h1 class="text-2xl font-bold mb-2">Festival de Jazz</h1>
+                                        <h1 class="text-2xl font-bold mb-2">{{ $event->title }}</h1>
                                         <div class="flex flex-wrap gap-4 text-sm text-gray-600">
                                             <span class="flex items-center">
                                                 <i class="fas fa-calendar-alt mr-2 text-[var(--primary)]"></i>
-                                                25 Mars 2024
+                                                {{ \Carbon\Carbon::parse($event->dateHeure)->translatedFormat('d F Y') }}
+
                                             </span>
                                             <span class="flex items-center">
                                                 <i class="fas fa-map-marker-alt mr-2 text-[var(--primary)]"></i>
-                                                Paris, France
+                                                {{ $event->lieu }}
                                             </span>
                                             <span class="flex items-center">
                                                 <i class="fas fa-users mr-2 text-[var(--primary)]"></i>
-                                                45/150 participants
+                                                {{ $users->count() }}/{{ $event->maxParticipants }} participants
                                             </span>
                                         </div>
                                     </div>
@@ -61,72 +62,46 @@
                             <!-- Participants List -->
                             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                                 <div class="p-4 bg-gray-50 border-b flex justify-between items-center">
-                                    <h2 class="font-semibold">Participants (45)</h2>
+                                    <h2 class="font-semibold">Participants ({{ $users->count() }})</h2>
                                     <button class="text-sm text-[var(--accent)] hover:text-[var(--primary)]">
                                         <i class="fas fa-download mr-1"></i>Exporter
                                     </button>
                                 </div>
 
                                 <div class="divide-y">
-                                    <!-- Participant 1 -->
-                                    <div class="p-4 flex items-center justify-between hover:bg-gray-50">
-                                        <div class="flex items-center gap-4">
-                                            <img src="https://randomuser.me/api/portraits/women/1.jpg"
-                                                alt="Marie Dupont" class="w-12 h-12 rounded-full">
-                                            <div>
-                                                <h3 class="font-medium">Marie Dupont</h3>
-                                                <p class="text-sm text-gray-600">marie.dupont@email.com</p>
+                                    @foreach ($users as $eventuser)
+                                        <!-- Participant 1 -->
+                                        <div class="p-4 flex items-center justify-between hover:bg-gray-50">
+                                            <div class="flex items-center gap-4">
+                                                <img src="{{ asset('storage/' . $eventuser->user->photo) }}"
+                                                    alt="{{ $eventuser->user->name }}" class="w-12 h-12 rounded-full">
+                                                <div>
+                                                    <h3 class="font-medium">{{ $eventuser->user->name }}</h3>
+                                                    <p class="text-sm text-gray-600">{{ $eventuser->user->email }}</p>
+                                                </div>
                                             </div>
+                                            @if ($event->user_id === Auth::id())
+                                                <div class="flex items-center gap-4">
+                                                    <form action="{{ route('event.delete.inscriptions', $event->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="user_id"
+                                                            value="{{ $eventuser->user->id }}">
+                                                        <button
+                                                            class="hover:text-[var(--primary)] px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">
+                                                            Retiré
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            @endif
                                         </div>
-                                        <div class="flex items-center gap-4">
-                                            <span
-                                                class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Confirmé</span>
-                                            <button class="text-gray-400 hover:text-[var(--primary)]">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Participant 2 -->
-                                    <div class="p-4 flex items-center justify-between hover:bg-gray-50">
-                                        <div class="flex items-center gap-4">
-                                            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Jean Martin"
-                                                class="w-12 h-12 rounded-full">
-                                            <div>
-                                                <h3 class="font-medium">Jean Martin</h3>
-                                                <p class="text-sm text-gray-600">jean.martin@email.com</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-4">
-                                            <span
-                                                class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">En
-                                                attente</span>
-                                            <button class="text-gray-400 hover:text-[var(--primary)]">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
+                                    @endforeach
                                     <!-- Add more participants here... -->
                                 </div>
 
                                 <!-- Pagination -->
                                 <div class="p-4 border-t">
-                                    <div class="flex items-center justify-between">
-                                        <button class="text-sm text-gray-600 hover:text-[var(--primary)]">
-                                            <i class="fas fa-chevron-left mr-1"></i>Précédent
-                                        </button>
-                                        <div class="flex items-center gap-2">
-                                            <span class="px-3 py-1 bg-[var(--primary)] text-white rounded">1</span>
-                                            <span class="px-3 py-1 hover:bg-gray-100 rounded cursor-pointer">2</span>
-                                            <span class="px-3 py-1 hover:bg-gray-100 rounded cursor-pointer">3</span>
-                                            <span>...</span>
-                                            <span class="px-3 py-1 hover:bg-gray-100 rounded cursor-pointer">8</span>
-                                        </div>
-                                        <button class="text-sm text-gray-600 hover:text-[var(--primary)]">
-                                            Suivant<i class="fas fa-chevron-right ml-1"></i>
-                                        </button>
-                                    </div>
+                                    {{ $users->links() }}
                                 </div>
                             </div>
                         </div>

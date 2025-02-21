@@ -74,8 +74,12 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        $comment = Comment::find($request->comment_id);
+
+        $event = $comment->event_id;
+        $comment->delete();
+        return redirect()->route('event.show', $event);
     }
 }

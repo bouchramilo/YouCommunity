@@ -4,6 +4,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventRegistrationController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,10 +29,6 @@ Route::get('/events/create', function () {
     return view('createEvent');
 })->middleware(['auth', 'verified'])->name('events.create');
 
-// Route::get('/allevents', function () {
-//     return view('allEvents');
-// })->middleware(['auth', 'verified'])->name('show.allevents');
-
 Route::middleware('auth')->group(function () {
     Route::get('/allevents', [EventController::class, 'index'])->name('show.allevents');
     Route::get('/myEvents', [EventController::class, 'showMyEvents'])->name('events.myEvents');
@@ -42,4 +40,14 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/detailsEvent/{event}/comment/add', [CommentController::class, 'store'])->name('event.comment.add');
+    Route::post('/detailsEvent/{event}/comment/delete', [CommentController::class, 'destroy'])->name('event.comment.delete');
 });
+
+
+Route::post('/event/{event}/inscriptions', [EventRegistrationController::class, 'destroy'])->name('event.delete.inscriptions')->middleware('auth');
+Route::get('/event/{event}/inscriptions', [EventRegistrationController::class, 'show'])->name('event.show.inscriptions')->middleware('auth');
+Route::post('/event/register', [EventRegistrationController::class, 'register'])->name('event.register')->middleware('auth');
+Route::post('/event/{eventId}/unregister', [EventRegistrationController::class, 'unregister'])->name('event.unregister')->middleware('auth');
+
+
+Route::middleware('auth')->get('/event/{event_id}/is-registered', [EventRegistrationController::class, 'isRegistered'])->name('event.isRegistered');

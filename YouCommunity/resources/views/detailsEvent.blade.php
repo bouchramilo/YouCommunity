@@ -43,10 +43,25 @@
                                                 participants max</span>
                                         </div>
                                     </div>
-                                    <button
-                                        class="bg-[var(--primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--accent)] transition duration-300">
-                                        S'inscrire
-                                    </button>
+                                    @if ($is_register === 0)
+                                        <form action="{{ route('event.register', $event->id) }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                            <button
+                                                class="bg-[var(--primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--accent)] transition duration-300">
+                                                S'inscrire
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('event.unregister', $event->id) }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                            <button
+                                                class="bg-[var(--primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--accent)] transition duration-300">
+                                                Se désinscrire
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
 
                                 <!-- Description -->
@@ -76,21 +91,24 @@
 
                                 <!-- Participants -->
                                 <div>
-                                    <h2 class="text-xl font-semibold mb-4 text-[var(--text)]">Participants (45/150)</h2>
-                                    <div class="flex -space-x-2 overflow-hidden">
-                                        <img src="https://randomuser.me/api/portraits/women/1.jpg"
-                                            class="w-10 h-10 rounded-full border-2 border-white">
-                                        <img src="https://randomuser.me/api/portraits/men/1.jpg"
-                                            class="w-10 h-10 rounded-full border-2 border-white">
-                                        <img src="https://randomuser.me/api/portraits/women/2.jpg"
-                                            class="w-10 h-10 rounded-full border-2 border-white">
-                                        <img src="https://randomuser.me/api/portraits/men/2.jpg"
-                                            class="w-10 h-10 rounded-full border-2 border-white">
-                                        <div
-                                            class="w-10 h-10 rounded-full border-2 border-white bg-[var(--primary)] flex items-center justify-center text-white text-sm">
-                                            +41
-                                        </div>
-                                    </div>
+                                    <h2
+                                        class="text-xl font-semibold mb-4 text-[var(--text)] hover:text-[var(--primary)] hover:underline hover:decoration-[var(--primary)]">
+                                        Participants ({{ $users->count() }}/{{ $event->maxParticipants }})
+                                    </h2>
+                                    <a href="/event/{{ $event->id }}/inscriptions"
+                                        class="flex -space-x-2 overflow-hidden">
+                                        @foreach ($users->take(4) as $eventuser)
+                                            <img src="{{ asset('storage/' . $eventuser->user->photo) }}"
+                                                class="w-10 h-10 rounded-full border-2 border-white">
+                                        @endforeach
+
+                                        @if ($users->count() > 4)
+                                            <div
+                                                class="w-10 h-10 rounded-full border-2 border-white bg-[var(--primary)] flex items-center justify-center text-white text-sm">
+                                                +{{ $users->count() - 4 }}
+                                            </div>
+                                        @endif
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -128,65 +146,6 @@
 
                                     <!-- Liste des commentaires -->
                                     <div class="space-y-6">
-                                        <!-- Commentaire 1 -->
-                                        {{-- <div class="flex gap-4">
-                                            <img src="https://randomuser.me/api/portraits/women/2.jpg"
-                                                alt="Sophie Martin" class="w-10 h-10 rounded-full">
-                                            <div class="flex-grow">
-                                                <div class="bg-[var(--background)] rounded-lg p-4">
-                                                    <div class="flex justify-between items-start mb-2">
-                                                        <div>
-                                                            <h4 class="font-semibold">Sophie Martin</h4>
-                                                            <span class="text-sm text-gray-600">Il y a 2 heures</span>
-                                                        </div>
-                                                        <button class="text-gray-400 hover:text-[var(--primary)]">
-                                                            <i class="fas fa-ellipsis-v"></i>
-                                                        </button>
-                                                    </div>
-                                                    <p class="text-gray-700">Super événement ! J'ai hâte d'y être.
-                                                        Est-ce qu'il y aura un parking à proximité ?</p>
-                                                    <div class="mt-3 flex items-center gap-4 text-sm">
-                                                        <button
-                                                            class="flex items-center gap-1 text-gray-600 hover:text-[var(--primary)]">
-                                                            <i class="far fa-heart"></i>
-                                                            <span>12</span>
-                                                        </button>
-                                                        <button class="text-gray-600 hover:text-[var(--primary)]">
-                                                            Répondre
-                                                        </button>
-                                                    </div>
-
-                                                    <!-- Réponses -->
-                                                    <div class="mt-4 ml-6 space-y-4">
-                                                        <div class="flex gap-4">
-                                                            <img src="https://randomuser.me/api/portraits/men/3.jpg"
-                                                                alt="Organisateur" class="w-8 h-8 rounded-full">
-                                                            <div class="flex-grow">
-                                                                <div class="bg-white rounded-lg p-3 shadow-sm">
-                                                                    <div class="flex justify-between items-start mb-2">
-                                                                        <div>
-                                                                            <h4 class="font-semibold">Jean Dupont</h4>
-                                                                            <span class="text-sm text-gray-600">Il y a 1
-                                                                                heure</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <p class="text-gray-700">Oui, il y a un grand
-                                                                        parking gratuit juste à côté de la salle !</p>
-                                                                    <div class="mt-2 flex items-center gap-4 text-sm">
-                                                                        <button
-                                                                            class="flex items-center gap-1 text-gray-600 hover:text-[var(--primary)]">
-                                                                            <i class="far fa-heart"></i>
-                                                                            <span>5</span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-
                                         @foreach ($comments as $comment)
                                             <!-- Commentaire 2 -->
                                             <div class="flex gap-4">
@@ -202,9 +161,19 @@
                                                                     class="text-sm text-gray-600">{{ $comment->created_at->diffForHumans() }}
                                                                 </span>
                                                             </div>
-                                                            <button class="text-gray-400 hover:text-[var(--primary)]">
-                                                                <i class="fas fa-ellipsis-v"></i>
-                                                            </button>
+                                                            @if ($comment->user_id === Auth::id())
+                                                                <form
+                                                                    action="{{ route('event.comment.delete', $event->id) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    <input type="hidden" name="comment_id"
+                                                                        value="{{ $comment->id }}">
+                                                                    <button
+                                                                        class="text-gray-400 hover:text-[var(--primary)]">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
                                                         </div>
                                                         <p class="text-gray-700">{{ $comment->contenu }}</p>
                                                         <div class="mt-3 flex items-center gap-4 text-sm">
@@ -217,7 +186,7 @@
 
                                     <!-- Pagination des commentaires -->
                                     <div class="mt-8 flex justify-center">
-                                        {{  $comments->links() }}
+                                        {{ $comments->links() }}
                                     </div>
                                 </div>
                             </div>

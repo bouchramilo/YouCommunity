@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Comment;
 use Carbon\Carbon;
+use App\Models\EventUser;
+
 
 class EventController extends Controller
 {
@@ -71,11 +74,36 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
+    // public function show(Event $event)
+    // {
+    //     $comments = $event->comments()->paginate(5);
+    //     $registration = EventUser::where('user_id', Auth::id())
+    //         ->where('event_id', $event)
+    //         ->exists();
+    //     $is_register = $registration ? 1 : 0;
+    //     return view('detailsEvent', compact('event', 'comments', 'users', 'is_register'));
+    // }
+
+
+
     public function show(Event $event)
     {
         $comments = $event->comments()->paginate(5);
-        return view('detailsEvent', compact('event', 'comments'));
+
+        $is_register = EventUser::where('user_id', Auth::id())
+            ->where('event_id', $event->id)
+            ->exists() ? 1 : 0;
+
+        $my_comment = Comment::where('user_id', Auth::id())
+            ->where('event_id', $event->id)
+            ->exists() ? 1 : 0;
+
+        $users = EventUser::where('event_id', $event->id)
+            ->with('user')->get();
+
+        return view('detailsEvent', compact('event', 'comments', 'users', 'is_register', 'my_comment'));
     }
+
 
 
     /**
