@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -13,7 +14,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::paginate(9);
+        return view('allevents', compact('events'));
     }
 
     /**
@@ -71,8 +73,10 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        return view('detailsEvent', compact('event'));
+        $comments = $event->comments()->paginate(5);
+        return view('detailsEvent', compact('event', 'comments'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

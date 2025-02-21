@@ -65,76 +65,72 @@
 
                         <!-- Events Grid -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <!-- Event Card 1 - Upcoming -->
-                            <a href="/event-details" class="group">
-                                <div
-                                    class="bg-white rounded-lg shadow-lg overflow-hidden transition transform hover:scale-105">
-                                    <div class="relative">
-                                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30"
-                                            alt="Concert" class="w-full h-48 object-cover">
+                            @foreach ($events as $event)
+                                @if ($event->status === 'A venir')
+                                    <!-- Event Card 1 - Upcoming -->
+                                    <a href="/detailsEvent/{{ $event->id }}" class="group">
                                         <div
-                                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm">
-                                            À venir
+                                            class="bg-white rounded-lg shadow-lg overflow-hidden transition transform hover:scale-105">
+                                            <div class="relative">
+                                                <img src="{{ asset('storage/' . $event->photo) }}" alt="Concert"
+                                                    class="w-full h-48 object-cover">
+                                                <div
+                                                    class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm">
+                                                    À venir
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <h3
+                                                    class="text-lg font-semibold mb-2 group-hover:text-[var(--primary)]">
+                                                    {{ $event->title }}</h3>
+                                                <div class="flex items-center text-gray-600 text-sm mb-2">
+                                                    <i class="fas fa-calendar-alt mr-2 text-[var(--primary)]"></i>
+                                                    {{ \Carbon\Carbon::parse($event->dateHeure)->translatedFormat('d F Y  H:i') }}
+                                                </div>
+                                                <div class="flex items-center text-gray-600 text-sm">
+                                                    <i class="fas fa-map-marker-alt mr-2 text-[var(--primary)]"></i>
+                                                    {{ $event->lieu }}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="p-4">
-                                        <h3 class="text-lg font-semibold mb-2 group-hover:text-[var(--primary)]">
-                                            Festival de Jazz</h3>
-                                        <div class="flex items-center text-gray-600 text-sm mb-2">
-                                            <i class="fas fa-calendar-alt mr-2 text-[var(--primary)]"></i>
-                                            25 Mars 2024
-                                        </div>
-                                        <div class="flex items-center text-gray-600 text-sm">
-                                            <i class="fas fa-map-marker-alt mr-2 text-[var(--primary)]"></i>
-                                            Paris, France
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Event Card 2 - Past -->
-                            <a href="/event-details" class="group">
-                                <div
-                                    class="bg-white rounded-lg shadow-lg overflow-hidden transition transform hover:scale-105">
-                                    <div class="relative">
-                                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87"
-                                            alt="Exposition" class="w-full h-48 object-cover filter grayscale">
+                                    </a>
+                                @elseif($event->status === 'Passé')
+                                    <!-- Event Card 2 - Past -->
+                                    <a href="/detailsEvent/{{ $event->id }}" class="group">
                                         <div
-                                            class="absolute top-4 right-4 bg-gray-500 text-white px-3 py-1 rounded-full text-sm">
-                                            Passé
+                                            class="bg-white rounded-lg shadow-lg overflow-hidden transition transform hover:scale-105">
+                                            <div class="relative">
+                                                <img src="{{ asset('storage/' . $event->photo) }}" alt="Exposition"
+                                                    class="w-full h-48 object-cover filter grayscale">
+                                                <div
+                                                    class="absolute top-4 right-4 bg-gray-500 text-white px-3 py-1 rounded-full text-sm">
+                                                    Passé
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <h3
+                                                    class="text-lg font-semibold mb-2 group-hover:text-[var(--primary)]">
+                                                    {{ $event->title }}</h3>
+                                                <div class="flex items-center text-gray-600 text-sm mb-2">
+                                                    <i class="fas fa-calendar-alt mr-2 text-[var(--primary)]"></i>
+                                                    {{ \Carbon\Carbon::parse($event->dateHeure)->translatedFormat('d F Y  H:i') }}
+                                                </div>
+                                                <div class="flex items-center text-gray-600 text-sm">
+                                                    <i class="fas fa-map-marker-alt mr-2 text-[var(--primary)]"></i>
+                                                    {{ $event->lieu }}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="p-4">
-                                        <h3 class="text-lg font-semibold mb-2 group-hover:text-[var(--primary)]">
-                                            Exposition d'Art</h3>
-                                        <div class="flex items-center text-gray-600 text-sm mb-2">
-                                            <i class="fas fa-calendar-alt mr-2 text-[var(--primary)]"></i>
-                                            15 Février 2024
-                                        </div>
-                                        <div class="flex items-center text-gray-600 text-sm">
-                                            <i class="fas fa-map-marker-alt mr-2 text-[var(--primary)]"></i>
-                                            Lyon, France
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                                    </a>
+                                @endif
+                            @endforeach
 
                             <!-- Add more event cards here... -->
                         </div>
 
                         <!-- Pagination -->
                         <div class="mt-8 flex justify-center">
-                            <nav class="flex space-x-2">
-                                <a href="#"
-                                    class="px-4 py-2 border rounded-lg hover:bg-[var(--primary)] hover:text-white transition">1</a>
-                                <a href="#"
-                                    class="px-4 py-2 border rounded-lg hover:bg-[var(--primary)] hover:text-white transition">2</a>
-                                <a href="#"
-                                    class="px-4 py-2 border rounded-lg hover:bg-[var(--primary)] hover:text-white transition">3</a>
-                                <span class="px-4 py-2">...</span>
-                                <a href="#"
-                                    class="px-4 py-2 border rounded-lg hover:bg-[var(--primary)] hover:text-white transition">10</a>
-                            </nav>
+                            {{ $events->links() }}
                         </div>
                     </main>
                 </div>

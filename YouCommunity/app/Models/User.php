@@ -24,10 +24,36 @@ class User extends Authenticatable
         'photo',
     ];
 
+    // relation One-to-Many : créer un event
     public function events()
     {
         return $this->hasMany(Event::class);
     }
+
+    // relation Many-to-Many : Inscription aux événements
+    public function registeredEvents()
+    {
+        return $this->belongsToMany(Event::class, 'event_user');
+    }
+
+    // relation Many-to-Many : Invitations envoyées
+    public function sentInvitations()
+    {
+        return $this->hasMany(EventInvitation::class, 'inviter_id');
+    }
+
+    // relation Many-to-Many : Invitations reçues
+    public function receivedInvitations()
+    {
+        return $this->hasMany(EventInvitation::class, 'invitee_id');
+    }
+
+    // relation One-to-Many : Commentaires
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.
