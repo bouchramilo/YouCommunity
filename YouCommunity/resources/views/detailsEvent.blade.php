@@ -95,7 +95,7 @@
                                         class="text-xl font-semibold mb-4 text-[var(--text)] hover:text-[var(--primary)] hover:underline hover:decoration-[var(--primary)]">
                                         Participants ({{ $users->count() }}/{{ $event->maxParticipants }})
                                     </h2>
-                                    <a href="/event/{{ $event->id }}/inscriptions"
+                                    <a href="{{ route('event.show.inscriptions',$event->id ) }}"
                                         class="flex -space-x-2 overflow-hidden">
                                         @foreach ($users->take(4) as $eventuser)
                                             <img src="{{ asset('storage/' . $eventuser->user->photo) }}"

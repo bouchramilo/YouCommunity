@@ -5,18 +5,15 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="/">
                         <x-application-logo />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
 
-                    <x-nav-link :href="route('show.allevents')" :active="request()->routeIs('show.allevents')">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('All Events') }}
                     </x-nav-link>
 
@@ -24,9 +21,23 @@
                         {{ __('My Events') }}
                     </x-nav-link>
 
+
+                    <x-nav-link :href="route('my.inscription')" :active="request()->routeIs('my.inscription')">
+                        {{ __('My inscriptions') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('events.create')" :active="request()->routeIs('events.create')">
                         {{ __('Create Event') }}
                     </x-nav-link>
+                    
+                    <x-nav-link :href="route('my.invitation')" :active="request()->routeIs('my.invitation')">
+                        {{ __('My invitations') }}
+                    </x-nav-link>
+
+                    {{-- <x-nav-link :href="route('show.allevents')" :active="request()->routeIs('show.allevents')">
+                        {{ __('All Events') }}
+                    </x-nav-link> --}}
+
                 </div>
 
             </div>

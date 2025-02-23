@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Mes Inscriptions') }}
+            {{ __('Mes Invitations') }}
         </h2>
     </x-slot>
 
@@ -18,7 +18,7 @@
                         <div class="max-w-5xl mx-auto">
                             <!-- Header Section -->
                             <div class="flex justify-end items-center mb-8">
-                                {{-- <h1 class="text-3xl font-bold">Mes Inscriptions</h1> --}}
+                                {{-- <h1 class="text-3xl font-bold">Mes invitations</h1> --}}
                                 <div class="flex gap-4">
                                     <select
                                         class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
@@ -31,36 +31,36 @@
                             <!-- Events List -->
                             <div class="space-y-6">
 
-                                @foreach ($myinscriptions as $inscription)
-                                    @if ($inscription->event->status === 'A venir')
+                                @foreach ($myinvitations as $invitation)
+                                    @if ($invitation->event->status === 'A venir')
                                         <!-- Upcoming Event -->
                                         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                                             <div class="flex flex-col md:flex-row">
                                                 <div class="md:w-1/4">
-                                                    <img src="{{ asset('storage/' . $inscription->event->photo) }}"
-                                                        alt="{{ $inscription->event->title }}"
+                                                    <img src="{{ asset('storage/' . $invitation->event->photo) }}"
+                                                        alt="{{ $invitation->event->title }}"
                                                         class="w-full h-48 md:h-full object-cover">
                                                 </div>
                                                 <div class="flex-grow p-6">
                                                     <div class="flex justify-between items-start">
                                                         <div>
                                                             <h3 class="text-xl font-semibold mb-2">
-                                                                {{ $inscription->event->title }}</h3>
+                                                                {{ $invitation->event->title }}</h3>
                                                             <div class="flex flex-wrap gap-4 text-sm text-gray-600">
                                                                 <span class="flex items-center">
                                                                     <i
                                                                         class="fas fa-calendar-alt mr-2 text-[var(--primary)]"></i>
-                                                                    {{ \Carbon\Carbon::parse($inscription->event->dateHeure)->translatedFormat('d F Y - H:i') }}
+                                                                    {{ \Carbon\Carbon::parse($invitation->event->dateHeure)->translatedFormat('d F Y - H:i') }}
                                                                 </span>
                                                                 <span class="flex items-center">
                                                                     <i
                                                                         class="fas fa-map-marker-alt mr-2 text-[var(--primary)]"></i>
-                                                                    {{ $inscription->event->lieu }}
+                                                                    {{ $invitation->event->lieu }}
                                                                 </span>
                                                                 <span class="flex items-center">
                                                                     <i
                                                                         class="fas fa-user-friends mr-2 text-[var(--primary)]"></i>
-                                                                    45/{{ $inscription->event->maxParticipants }}
+                                                                    45/{{ $invitation->event->maxParticipants }}
                                                                     participants
                                                                 </span>
                                                             </div>
@@ -70,7 +70,7 @@
                                                                 class="bg-green-500 text-white px-3 py-1 rounded-full text-sm">À
                                                                 venir</span>
                                                             <form
-                                                                action="{{ route('event.delete.inscriptions', $inscription->event->id) }}"
+                                                                action="{{ route('event.delete.invitations', $invitation->event->id) }}"
                                                                 method="post">
                                                                 @method('POST')
                                                                 @csrf
@@ -78,13 +78,13 @@
                                                                     value="{{ Auth::id() }}">
                                                                 <button class="text-red-500 hover:text-red-700 text-sm">
                                                                     <i class="fas fa-times mr-1"></i>
-                                                                    Annuler l'inscription
+                                                                    Annuler l'invitation
                                                                 </button>
                                                             </form>
                                                         </div>
                                                     </div>
                                                     <div class="mt-4">
-                                                        <a href="{{ route('event.show', $inscription->event->id) }}"
+                                                        <a href="{{ route('event.show', $invitation->event->id) }}"
                                                             class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                             Voir les détails <i class="fas fa-arrow-right ml-1"></i>
                                                         </a>
@@ -92,36 +92,36 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @elseif($inscription->event->status === 'Passé')
+                                    @elseif($invitation->event->status === 'Passé')
                                         <!-- Past Event -->
                                         <div class="bg-white rounded-lg shadow-lg overflow-hidden opacity-75">
                                             <div class="flex flex-col md:flex-row">
                                                 <div class="md:w-1/4">
-                                                    <img src="{{ asset('storage/' . $inscription->event->photo) }}"
-                                                        alt="{{ $inscription->event->title }}"
+                                                    <img src="{{ asset('storage/' . $invitation->event->photo) }}"
+                                                        alt="{{ $invitation->event->title }}"
                                                         class="w-full h-48 md:h-full object-cover filter grayscale">
                                                 </div>
                                                 <div class="flex-grow p-6">
                                                     <div class="flex justify-between items-start">
                                                         <div>
                                                             <h3 class="text-xl font-semibold mb-2">
-                                                                {{ $inscription->event->title }}
+                                                                {{ $invitation->event->title }}
                                                             </h3>
                                                             <div class="flex flex-wrap gap-4 text-sm text-gray-600">
                                                                 <span class="flex items-center">
                                                                     <i
                                                                         class="fas fa-calendar-alt mr-2 text-[var(--primary)]"></i>
-                                                                    {{ \Carbon\Carbon::parse($inscription->event->dateHeure)->translatedFormat('d F Y - H:i') }}
+                                                                    {{ \Carbon\Carbon::parse($invitation->event->dateHeure)->translatedFormat('d F Y - H:i') }}
                                                                 </span>
                                                                 <span class="flex items-center">
                                                                     <i
                                                                         class="fas fa-map-marker-alt mr-2 text-[var(--primary)]"></i>
-                                                                    {{ $inscription->event->lieu }}
+                                                                    {{ $invitation->event->lieu }}
                                                                 </span>
                                                                 <span class="flex items-center">
                                                                     <i
                                                                         class="fas fa-user-friends mr-2 text-[var(--primary)]"></i>
-                                                                    120/{{ $inscription->event->maxParticipants }}
+                                                                    120/{{ $invitation->event->maxParticipants }}
                                                                     participants
                                                                 </span>
                                                             </div>
@@ -132,7 +132,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-4">
-                                                        <a href="{{ route('event.show', $inscription->event->id) }}"
+                                                        <a href="{{ route('event.show', $invitation->event->id) }}"
                                                             class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                             Voir les détails <i class="fas fa-arrow-right ml-1"></i>
                                                         </a>
@@ -147,9 +147,9 @@
 
                         </div>
                         <!-- Pagination -->
-                        <div class="mt-8 flex justify-center">
-                            {{ $myinscriptions->links() }}
-                        </div>
+                        {{-- <div class="mt-8 flex justify-center">
+                            {{ $myinvitations->links() }}
+                        </div> --}}
                     </main>
 
 

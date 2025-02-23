@@ -33,9 +33,11 @@ class Event extends Model
     }
 
     // Relation Many-to-Many : Invitations envoyées
-    public function invitations()
+    public function invitedUsers()
     {
-        return $this->hasMany(EventInvitation::class);
+        return $this->belongsToMany(User::class, 'event_invitations')
+                    ->withPivot('status')
+                    ->withTimestamps();
     }
 
     public function comments()

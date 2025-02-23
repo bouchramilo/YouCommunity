@@ -36,16 +36,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Event::class, 'event_user');
     }
 
-    // relation Many-to-Many : Invitations envoyées
-    public function sentInvitations()
+    public function invitations()
     {
-        return $this->hasMany(EventInvitation::class, 'inviter_id');
-    }
-
-    // relation Many-to-Many : Invitations reçues
-    public function receivedInvitations()
-    {
-        return $this->hasMany(EventInvitation::class, 'invitee_id');
+        return $this->belongsToMany(Event::class, 'event_invitations')
+                    ->withPivot('status')
+                    ->withTimestamps();
     }
 
     // relation One-to-Many : Commentaires

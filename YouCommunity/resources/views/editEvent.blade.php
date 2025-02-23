@@ -18,7 +18,10 @@
                                 <p class="text-sm text-gray-600 mt-2">{{ $event->title }}</p>
                             </div>
 
-                            <form class="space-y-6">
+                            <form class="space-y-6" method="POST" action="{{ route('event.update', $event->id) }}"
+                                enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
                                 <!-- Image actuelle et upload -->
                                 <div>
                                     <label class="block text-sm font-medium text-[var(--text)] mb-2">
@@ -26,13 +29,14 @@
                                     </label>
                                     <div class="flex items-center gap-4">
                                         <div class="relative w-32 h-32">
-                                            <img src="{{ asset('storage/' . $event->photo) }}"
-                                                alt="Image actuelle" class="w-full h-full object-cover rounded-lg">
+                                            <img src="{{ asset('storage/' . $event->photo) }}" alt="Image actuelle"
+                                                class="w-full h-full object-cover rounded-lg">
                                             <button type="button"
                                                 class="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600">
                                                 <i class="fas fa-times"></i>
                                             </button>
                                         </div>
+
                                         <div class="flex-grow">
                                             <div class="flex justify-center items-center w-full">
                                                 <label
@@ -40,13 +44,19 @@
                                                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                                         <i
                                                             class="fas fa-cloud-upload-alt text-2xl text-gray-500 mb-2"></i>
-                                                        <p class="text-sm text-gray-500">Cliquez ou glissez une nouvelle
+                                                        <p class="text-sm">Cliquez ou glissez une nouvelle
                                                             image</p>
                                                     </div>
-                                                    <input type="file" class="hidden" accept="image/*">
+                                                    <input type="file" name="photo" class="hidden"
+                                                        accept="image/*">
                                                 </label>
                                             </div>
                                         </div>
+                                        @error('photo')
+                                            <div>
+                                                <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -58,6 +68,11 @@
                                     <input type="text" id="title" name="title" value="{{ $event->title }}"
                                         class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
                                 </div>
+                                @error('title')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Description -->
                                 <div>
@@ -67,6 +82,11 @@
                                     <textarea id="description" name="description" rows="4"
                                         class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none resize-none">{{ $event->description }}</textarea>
                                 </div>
+                                @error('description')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Date et Heure -->
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -74,40 +94,61 @@
                                         <label for="date" class="block text-sm font-medium text-[var(--text)] mb-2">
                                             Date
                                         </label>
-                                        <input type="date" id="date" name="date" value="{{ $event->dateHeure }}"
+                                        <input type="date" id="date" name="dateHeure"
+                                            value="{{ \Carbon\Carbon::parse($event->dateHeure)->translatedFormat('Y-m-d') }}"
                                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
                                     </div>
-                                    <div>
+                                    {{-- <div>
                                         <label for="time" class="block text-sm font-medium text-[var(--text)] mb-2">
                                             Heure
                                         </label>
-                                        <input type="time" id="time" name="time" value="{{ $event->dateHeure }}"
+                                        <input type="time" id="time" name="time"
+                                            value="{{ \Carbon\Carbon::parse($event->dateHeure)->translatedFormat('H:i') }}"
                                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                                    </div>
+                                    </div> --}}
                                 </div>
+                                @error('dateHeure')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Lieu -->
                                 <div>
                                     <label for="location" class="block text-sm font-medium text-[var(--text)] mb-2">
                                         Lieu
                                     </label>
-                                    <input type="text" id="location" name="location" value="{{ $event->lieu }}"
+                                    <input type="text" id="location" name="lieu" value="{{ $event->lieu }}"
                                         class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
                                 </div>
+                                @error('lieu')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Catégorie -->
                                 <div>
                                     <label for="category" class="block text-sm font-medium text-[var(--text)] mb-2">
                                         Catégorie
                                     </label>
-                                    <select id="category" name="category"
+                                    <select id="category" name="categorie"
                                         class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                                        <option value="music" selected>Musique</option>
+                                        <option value="">Sélectionnez une catégorie</option>
+                                        <option value="music">Musique</option>
                                         <option value="sport">Sport</option>
                                         <option value="culture">Culture</option>
                                         <option value="food">Gastronomie</option>
+                                        <option value="tech">Technologie</option>
+                                        <option value="business">Business</option>
+                                        <option value="other">Autre</option>
                                     </select>
                                 </div>
+                                @error('categorie')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Nombre max de participants -->
                                 <div>
@@ -115,22 +156,32 @@
                                         class="block text-sm font-medium text-[var(--text)] mb-2">
                                         Nombre maximum de participants
                                     </label>
-                                    <input type="number" id="maxParticipants" name="maxParticipants" value="{{ $event->maxParticipants }}"
+                                    <input type="number" id="maxParticipants" name="maxParticipants"
+                                        value="{{ $event->maxParticipants }}"
                                         class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
                                 </div>
+                                @error('maParticipants')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Statut -->
-                                <div>
+                                {{-- <div>
                                     <label for="status" class="block text-sm font-medium text-[var(--text)] mb-2">
                                         Statut de l'événement
                                     </label>
                                     <select id="status" name="status"
                                         class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                                        <option value="active" selected>Actif</option>
-                                        <option value="draft">Brouillon</option>
-                                        <option value="cancelled">Annulé</option>
+                                        <option value="A venir">A venir</option>
+                                        <option value="Passé">Passé</option>
                                     </select>
                                 </div>
+                                @error('status')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror --}}
 
                                 <!-- Boutons d'action -->
                                 <div class="flex gap-4 pt-4">

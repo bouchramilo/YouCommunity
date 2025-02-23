@@ -118,15 +118,15 @@
                                                                 class="bg-green-500 text-white px-3 py-1 rounded-full text-sm">{{ $event->status }}</span>
                                                         </div>
                                                         <div class="flex flex-wrap gap-3">
-                                                            <a href="#"
+                                                            <a href="{{ route('event.show.inscriptions',$event->id ) }}"
                                                                 class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                                 <i class="fas fa-users mr-1"></i>Voir les inscriptions
                                                             </a>
-                                                            <a href="#"
+                                                            <a href="{{ route('event.show.inscriptions',$event->id ) }}"
                                                                 class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                                 <i class="fas fa-envelope mr-1"></i>Voir les invitations
                                                             </a>
-                                                            <a href="/event/edit/{{ $event->id }}"
+                                                            <a href="{{ route('event.edit',$event->id ) }}"
                                                                 class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                                 <i class="fas fa-edit mr-1"></i>Modifier
                                                             </a>

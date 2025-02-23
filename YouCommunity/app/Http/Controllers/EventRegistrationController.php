@@ -63,6 +63,17 @@ class EventRegistrationController extends Controller
 
         return view('allInscriptionEvent', compact('event', 'users'));
     }
+    // *****************************************************************************************************************************
+    public function showAll(Event $event)
+    {
+        $myinscriptions = EventUser::where('user_id', Auth::id())
+            ->with('user')
+            ->with('event')->paginate(4);
+
+            // dd($events);
+
+        return view('mesInscriptions', compact('myinscriptions'));
+    }
 
     // *****************************************************************************************************************************
     public function destroy(Request $request, $event_id)

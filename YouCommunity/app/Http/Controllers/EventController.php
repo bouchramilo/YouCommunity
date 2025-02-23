@@ -119,7 +119,32 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        // dd($event, $request);
+
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'maxParticipants' => ['required', 'integer'],
+            'dateHeure' => ['required', 'date'],
+            'lieu' => ['required', 'string', 'max:255'],
+            'categorie' => ['required', 'string', 'max:255'],
+            // 'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+        ]);
+
+        $photoPath = $request->file('photo') ? $request->file('photo')->store('photos', 'public') : $event->photo;
+
+        $event->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'maxParticipants' => $request->maxParticipants,
+            'dateHeure' => $request->dateHeure,
+            'lieu' => $request->lieu,
+            'photo' => $photoPath,
+            'categorie' => $request->categorie,
+            // 'status' => $request->status,
+        ]);
+
+        return redirect(route('events.myEvents', absolute: false));
     }
 
     /**
