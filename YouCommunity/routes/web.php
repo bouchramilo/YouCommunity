@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/myEvents', [EventController::class, 'showMyEvents'])->name('events.myEvents');
     Route::post('event/create', [EventController::class, 'store'])->name('event.create');
     Route::put('/event/update/{event}', [EventController::class, 'update'])->name('event.update');
+    Route::put('/event/status/{event}', [EventController::class, 'updateStatus'])->name('event.status');
     Route::get('event/edit/{event}', [EventController::class, 'edit'])->name('event.edit');
     Route::delete('event/delete/{event}', [EventController::class, 'destroy'])->name('event.delete');
     Route::get('/detailsEvent/{event}', [EventController::class, 'show'])->name('event.show');
@@ -53,9 +54,14 @@ Route::post('/event/register', [EventRegistrationController::class, 'register'])
 Route::post('/event/{eventId}/unregister', [EventRegistrationController::class, 'unregister'])->name('event.unregister')->middleware('auth');
 
 
-Route::middleware('auth')->get('/event/{event_id}/is-registered', [EventRegistrationController::class, 'isRegistered'])->name('event.isRegistered');
+// Route::middleware('auth')->get('/event/{event_id}/is-registered', [EventRegistrationController::class, 'isRegistered'])->name('event.isRegistered');
 Route::middleware('auth')->get('/myInscriptions', [EventRegistrationController::class, 'showAll'])->name('my.inscription');
 
 
 
 Route::get('/myInvitation', [InvitationController::class, 'show'])->name('my.invitation')->middleware('auth');
+Route::get('/event/{event}/inviterUser', [InvitationController::class, 'index'])->name('event.show.inviter')->middleware('auth');
+Route::post('/event/{event}/inviter', [InvitationController::class, 'store'])->name('event.inviter')->middleware('auth');
+Route::get('/event/{event}/invitation', [InvitationController::class, 'showAll'])->name('event.show.invitations')->middleware('auth');
+Route::post('/event/{event}/invitation/status', [InvitationController::class, 'statusInv'])->name('event.invitation.status')->middleware('auth');
+// Route::post('/event/{event}/invitation/decline', [InvitationController::class, 'accept'])->name('event.accepted.invitation')->middleware('auth');

@@ -40,7 +40,7 @@
                             </div>
 
                             <!-- Search and Filter -->
-                            {{-- <div class="mb-8">
+                            <div class="mb-8">
                                 <div class="flex gap-4">
                                     <div class="flex-grow relative">
                                         <input type="text" placeholder="Rechercher un participant..."
@@ -55,39 +55,36 @@
                                         <option value="pending">En attente</option>
                                     </select>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <!-- Participants List -->
                             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                                 <div class="p-4 bg-gray-50 border-b flex justify-between items-center">
                                     <h2 class="font-semibold">Participants ({{ $users->count() }})</h2>
-                                    <button class="text-sm text-[var(--accent)] hover:text-[var(--primary)]">
-                                        <i class="fas fa-download mr-1"></i>Exporter
-                                    </button>
                                 </div>
 
                                 <div class="divide-y">
-                                    @foreach ($users as $eventuser)
+                                    @foreach ($users as $user)
                                         <!-- Participant 1 -->
                                         <div class="p-4 flex items-center justify-between hover:bg-gray-50">
                                             <div class="flex items-center gap-4">
-                                                <img src="{{ asset('storage/' . $eventuser->user->photo) }}"
-                                                    alt="{{ $eventuser->user->name }}" class="w-12 h-12 rounded-full">
+                                                <img src="{{ asset('storage/' . $user->photo) }}"
+                                                    alt="{{ $user->name }}" class="w-12 h-12 rounded-full">
                                                 <div>
-                                                    <h3 class="font-medium">{{ $eventuser->user->name }}</h3>
-                                                    <p class="text-sm text-gray-600">{{ $eventuser->user->email }}</p>
+                                                    <h3 class="font-medium">{{ $user->name }}</h3>
+                                                    <p class="text-sm text-gray-600">{{ $user->email }}</p>
                                                 </div>
                                             </div>
                                             @if ($event->user_id === Auth::id())
                                                 <div class="flex items-center gap-4">
-                                                    <form action="{{ route('event.delete.inscriptions', $event->id) }}"
+                                                    <form action="{{ route('event.inviter', $event->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         <input type="hidden" name="user_id"
-                                                            value="{{ $eventuser->user->id }}">
+                                                            value="{{ $user->id }}">
                                                         <button
-                                                            class="hover:text-[var(--primary)] px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">
-                                                            Retiré
+                                                            class="hover:text-[var(--primary)] px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                                                            inviter
                                                         </button>
                                                     </form>
                                                 </div>
@@ -99,7 +96,7 @@
 
                                 <!-- Pagination -->
                                 <div class="p-4 border-t">
-                                    {{ $users->links() }}
+                                    {{-- {{ $users->links() }} --}}
                                 </div>
                             </div>
                         </div>

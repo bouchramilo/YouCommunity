@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <main class="flex-grow container mx-auto px-4 py-8">
                         <!-- Search and Filter Section -->
-                        <div class="mb-8">
+                        {{-- <div class="mb-8">
                             <h1 class="text-3xl font-bold mb-6">Découvrez tous les événements</h1>
 
                             <!-- Search Bar -->
@@ -61,7 +61,7 @@
                                     <option value="marseille">Marseille</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- Events Grid -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

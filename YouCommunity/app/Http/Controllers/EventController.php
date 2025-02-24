@@ -12,6 +12,7 @@ use App\Models\EventUser;
 
 class EventController extends Controller
 {
+    // ***********************************************************************************************************************************
     /**
      * Display a listing of the resource.
      */
@@ -21,6 +22,7 @@ class EventController extends Controller
         return view('allevents', compact('events'));
     }
 
+    // ***********************************************************************************************************************************
     /**
      * Show the form for creating a new resource.
      */
@@ -29,6 +31,7 @@ class EventController extends Controller
         //
     }
 
+    // ***********************************************************************************************************************************
     /**
      * Store a newly created resource in storage.
      */
@@ -60,6 +63,7 @@ class EventController extends Controller
         return redirect(route('events.myEvents', absolute: false));
     }
 
+    // ***********************************************************************************************************************************
     /**
      * Display All my events.
      */
@@ -71,20 +75,10 @@ class EventController extends Controller
         return view('mesEventsCreate', compact('events'));
     }
 
+    // ***********************************************************************************************************************************
     /**
      * Display the specified resource.
      */
-    // public function show(Event $event)
-    // {
-    //     $comments = $event->comments()->paginate(5);
-    //     $registration = EventUser::where('user_id', Auth::id())
-    //         ->where('event_id', $event)
-    //         ->exists();
-    //     $is_register = $registration ? 1 : 0;
-    //     return view('detailsEvent', compact('event', 'comments', 'users', 'is_register'));
-    // }
-
-
 
     public function show(Event $event)
     {
@@ -105,7 +99,7 @@ class EventController extends Controller
     }
 
 
-
+    // ***********************************************************************************************************************************
     /**
      * Show the form for editing the specified resource.
      */
@@ -114,6 +108,7 @@ class EventController extends Controller
         return view('editEvent', compact('event'));
     }
 
+    // ***********************************************************************************************************************************
     /**
      * Update the specified resource in storage.
      */
@@ -147,6 +142,7 @@ class EventController extends Controller
         return redirect(route('events.myEvents', absolute: false));
     }
 
+    //    ***********************************************************************************************************************************
     /**
      * Remove the specified resource from storage.
      */
@@ -159,5 +155,14 @@ class EventController extends Controller
         $event->delete();
 
         return redirect()->route('events.myEvents')->with('success', 'Événement supprimé (archivé) avec succès.');
+    }
+
+    // ***********************************************************************************************************************************
+    public function updateStatus(Request $request, Event $event)
+    {
+        $event->status = $request->status;
+        $event->save();
+
+        return back()->with('success', 'Statut de l’événement mis à jour avec succès.');
     }
 }

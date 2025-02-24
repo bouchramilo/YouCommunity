@@ -23,9 +23,13 @@ class DatabaseSeeder extends Seeder
     // }
     public function run(): void
     {
-        // Créer 10 utilisateurs avec des événements associés
         User::factory(4)->create()->each(function ($user) {
             Event::factory(3)->create(['user_id' => $user->id]);
         });
+        $this->call([
+
+            EventInvitationSeeder::class,
+        ]);
     }
+    
 }

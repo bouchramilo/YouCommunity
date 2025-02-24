@@ -22,12 +22,12 @@ class EventFactory extends Factory
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->paragraph(),
             'maxParticipants' => $this->faker->numberBetween(10, 100),
-            'dateHeure' => Carbon::now()->addDays($this->faker->numberBetween(1, 30)), // Date future aléatoire
+            'dateHeure' => Carbon::now()->addDays($this->faker->numberBetween(1, 30)), 
             'lieu' => $this->faker->city(),
             'photo' => $this->faker->imageUrl(640, 480, 'events'),
             'categorie' => $this->faker->randomElement(['Sport', 'Musique', 'Technologie', 'Art']),
             'status' => $this->faker->randomElement(['A venir', 'Passé']),
-            'user_id' => User::factory(), // Associe un user aléatoire
+            'user_id' => User::factory(),
         ];
     }
 }

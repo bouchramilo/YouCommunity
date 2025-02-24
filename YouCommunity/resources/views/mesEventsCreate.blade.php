@@ -59,7 +59,7 @@
                             </div>
 
                             <!-- Filter Section -->
-                            <div class="flex gap-4 mb-6">
+                            {{-- <div class="flex gap-4 mb-6">
                                 <select
                                     class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
                                     <option value="all">Tous les événements</option>
@@ -69,7 +69,7 @@
                                 </select>
                                 <input type="text" placeholder="Rechercher un événement..."
                                     class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                            </div>
+                            </div> --}}
 
                             <!-- Events List -->
                             <div class="space-y-6">
@@ -114,19 +114,33 @@
                                                                     </span>
                                                                 </div>
                                                             </div>
-                                                            <span
-                                                                class="bg-green-500 text-white px-3 py-1 rounded-full text-sm">{{ $event->status }}</span>
+                                                            <form action="{{ route('event.status', $event->id) }}"
+                                                                method="post">
+                                                                @method('PUT')
+                                                                @csrf
+                                                                <input type="hidden" name="status" value="Passé">
+                                                                <button type="submit"
+                                                                    class="bg-green-500 text-white px-3 py-1 rounded-full text-sm">
+                                                                    {{ $event->status }}
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                         <div class="flex flex-wrap gap-3">
-                                                            <a href="{{ route('event.show.inscriptions',$event->id ) }}"
+                                                            <a href="{{ route('event.show.inscriptions', $event->id) }}"
                                                                 class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                                 <i class="fas fa-users mr-1"></i>Voir les inscriptions
                                                             </a>
-                                                            <a href="{{ route('event.show.inscriptions',$event->id ) }}"
+                                                            <a href="{{ route('event.show.invitations', $event->id) }}"
                                                                 class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                                 <i class="fas fa-envelope mr-1"></i>Voir les invitations
                                                             </a>
-                                                            <a href="{{ route('event.edit',$event->id ) }}"
+                                                            <a href="{{ route('event.show.inviter', $event->id) }}"
+                                                                class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
+                                                                <i class="fas fa-users mr-1"></i>ajouter des invités
+                                                            </a>
+                                                        </div>
+                                                        <div class="flex flex-wrap gap-3">
+                                                            <a href="{{ route('event.edit', $event->id) }}"
                                                                 class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                                 <i class="fas fa-edit mr-1"></i>Modifier
                                                             </a>
@@ -188,11 +202,11 @@
                                                         </div>
                                                         <div class="flex flex-wrap gap-3">
 
-                                                            <a href="#"
+                                                            <a href="{{ route('event.show.inscriptions', $event->id) }}"
                                                                 class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                                 <i class="fas fa-users mr-1"></i>Voir les participants
                                                             </a>
-                                                            <a href="#"
+                                                            <a href="{{ route('event.show.invitations', $event->id) }}"
                                                                 class="text-[var(--accent)] hover:text-[var(--primary)] text-sm">
                                                                 <i class="fas fa-envelope mr-1"></i>Voir les
                                                                 invitations

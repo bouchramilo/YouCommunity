@@ -17,8 +17,7 @@
                     <main class="flex-grow container mx-auto px-4 py-4">
                         <div class="max-w-5xl mx-auto">
                             <!-- Header Section -->
-                            <div class="flex justify-end items-center mb-8">
-                                {{-- <h1 class="text-3xl font-bold">Mes Inscriptions</h1> --}}
+                            {{-- <div class="flex justify-end items-center mb-8">
                                 <div class="flex gap-4">
                                     <select
                                         class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
@@ -27,7 +26,7 @@
                                         <option value="past">Passés</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- Events List -->
                             <div class="space-y-6">
 
