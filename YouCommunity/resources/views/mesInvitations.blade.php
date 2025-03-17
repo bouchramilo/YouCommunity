@@ -7,7 +7,7 @@
 
     <div class="py-12  min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg min-h-[500px]">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
 
@@ -60,7 +60,7 @@
                                                                 <span class="flex items-center">
                                                                     <i
                                                                         class="fas fa-user-friends mr-2 text-[var(--primary)]"></i>
-                                                                    45/{{ $invitation->maxParticipants }}
+                                                                    {{ $invitation->maxParticipants }}
                                                                     participants
                                                                 </span>
                                                             </div>

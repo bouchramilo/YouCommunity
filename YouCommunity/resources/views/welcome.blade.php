@@ -39,7 +39,7 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <a href="/" class="text-2xl font-bold text-[var(--primary)]">EventConnect</a>
+                    <a href="/" class="text-2xl font-bold text-[var(--text)]"><span class="text-[var(--primary)]">Y</span>ou<span class="text-[var(--primary)]">C</span>ommunity</a>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
                     @if (Route::has('login'))

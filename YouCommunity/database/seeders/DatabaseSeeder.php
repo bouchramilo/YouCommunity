@@ -24,12 +24,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory(4)->create()->each(function ($user) {
-            Event::factory(3)->create(['user_id' => $user->id]);
+            Event::factory(2)->create(['user_id' => $user->id]);
         });
         $this->call([
 
             EventInvitationSeeder::class,
         ]);
     }
-    
+
 }

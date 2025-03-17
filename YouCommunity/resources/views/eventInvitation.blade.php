@@ -86,20 +86,20 @@
                                                         <input type="hidden" name="user_id"
                                                             value="{{ $invitation->id }}">
                                                         @if ($invitation->pivot->status == 'pending')
-                                                            <button
+                                                            <div
                                                                 class="hover:text-[var(--primary)] px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
                                                                 {{ $invitation->pivot->status }}
-                                                            </button>
+                                                            </div>
                                                         @elseif($invitation->pivot->status == 'accepted')
-                                                            <button
+                                                            <div
                                                                 class="hover:text-[var(--primary)] px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
                                                                 {{ $invitation->pivot->status }}
-                                                            </button>
+                                                            </div>
                                                         @elseif($invitation->pivot->status == 'declined')
-                                                            <button
+                                                            <div
                                                                 class="hover:text-[var(--primary)] px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">
                                                                 {{ $invitation->pivot->status }}
-                                                            </button>
+                                                            </div>
                                                         @endif
                                                     </form>
                                                 </div>

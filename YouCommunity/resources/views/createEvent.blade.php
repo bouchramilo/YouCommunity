@@ -18,7 +18,8 @@
                                 <p class="text-sm text-gray-600 mt-2">Partagez votre événement avec la communauté</p>
                             </div>
 
-                            <form action="{{ route('event.create') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
+                            <form action="{{ route('event.create') }}" method="POST" class="space-y-6"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <!-- Titre -->
                                 <div>
@@ -35,6 +36,11 @@
                                             placeholder="Ex: Concert de Jazz au Parc">
                                     </div>
                                 </div>
+                                @error('title')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Description -->
                                 <div>
@@ -45,6 +51,12 @@
                                         class="block w-full p-3 border resize-none border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none"
                                         placeholder="Décrivez votre événement..."></textarea>
                                 </div>
+
+                                @error('description')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Date et Heure -->
                                 <div>
@@ -60,6 +72,12 @@
                                             class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
                                     </div>
                                 </div>
+
+                                @error('dateHeure')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Max Participants -->
                                 <div>
@@ -79,6 +97,12 @@
                                     </div>
                                 </div>
 
+                                @error('maxParticipants')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
+
                                 <!-- Lieu -->
                                 <div>
                                     <label for="location" class="block text-sm font-medium text-[var(--text)] mb-2">
@@ -94,6 +118,12 @@
                                             placeholder="Ex: 123 rue de Paris, 75001 Paris">
                                     </div>
                                 </div>
+
+                                @error('lieu')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Catégorie -->
                                 <div>
@@ -119,6 +149,12 @@
                                     </div>
                                 </div>
 
+                                @error('categorie')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
+
                                 <!-- Photo Upload -->
                                 <div>
                                     <label for="event_photo" class="block text-sm font-medium text-[var(--text)] mb-2">
@@ -143,6 +179,12 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                @error('photo')
+                                    <div>
+                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+                                    </div>
+                                @enderror
 
                                 <!-- Submit Button -->
                                 <button type="submit"

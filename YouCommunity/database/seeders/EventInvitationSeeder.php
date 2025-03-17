@@ -22,7 +22,7 @@ class EventInvitationSeeder extends Seeder
             return;
         }
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             DB::table('event_invitations')->insert([
                 'user_id' => $users->random()->id,
                 'event_id' => $events->random()->id,

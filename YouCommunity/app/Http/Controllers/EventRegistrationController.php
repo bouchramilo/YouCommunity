@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\EventUser;
+use App\Notifications\NouvelleNotification;
+use Illuminate\Support\Facades\Notification;
 
 
 class EventRegistrationController extends Controller

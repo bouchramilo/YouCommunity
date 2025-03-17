@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Event;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\NouvelleNotification;
+use Illuminate\Support\Facades\Notification;
 
 
 class InvitationController extends Controller
@@ -46,6 +48,13 @@ class InvitationController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        // send email 
+        $user = User::find($request->user_id);
+        $message = "Nous avons le plaisir de vous inviter à notre événement spécial '$event->title', qui se tiendra le '$event->dateHeure' au '$event->lieu'.";
+        Notification::send($user, new NouvelleNotification($message));
+
+
         return redirect(route('event.show.inviter', $event->id));
     }
 

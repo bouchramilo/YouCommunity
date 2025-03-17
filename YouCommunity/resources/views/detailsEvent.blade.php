@@ -43,24 +43,28 @@
                                                 participants max</span>
                                         </div>
                                     </div>
-                                    @if ($is_register === 0)
-                                        <form action="{{ route('event.register', $event->id) }}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="event_id" value="{{ $event->id }}">
-                                            <button
-                                                class="bg-[var(--primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--accent)] transition duration-300">
-                                                S'inscrire
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('event.unregister', $event->id) }}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="event_id" value="{{ $event->id }}">
-                                            <button
-                                                class="bg-[var(--primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--accent)] transition duration-300">
-                                                Se désinscrire
-                                            </button>
-                                        </form>
+                                    @if ($event->status === 'A venir')
+
+
+                                        @if ($is_register === 0)
+                                            <form action="{{ route('event.register', $event->id) }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                                <button
+                                                    class="bg-[var(--primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--accent)] transition duration-300">
+                                                    S'inscrire
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('event.unregister', $event->id) }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                                <button
+                                                    class="bg-[var(--primary)] text-white px-6 py-3 rounded-lg hover:bg-[var(--accent)] transition duration-300">
+                                                    Se désinscrire
+                                                </button>
+                                            </form>
+                                        @endif
                                     @endif
                                 </div>
 
@@ -95,7 +99,7 @@
                                         class="text-xl font-semibold mb-4 text-[var(--text)] hover:text-[var(--primary)] hover:underline hover:decoration-[var(--primary)]">
                                         Participants ({{ $users->count() }}/{{ $event->maxParticipants }})
                                     </h2>
-                                    <a href="{{ route('event.show.inscriptions',$event->id ) }}"
+                                    <a href="{{ route('event.show.inscriptions', $event->id) }}"
                                         class="flex -space-x-2 overflow-hidden">
                                         @foreach ($users->take(4) as $eventuser)
                                             <img src="{{ asset('storage/' . $eventuser->user->photo) }}"
