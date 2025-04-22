@@ -98,14 +98,6 @@
                                             value="{{ \Carbon\Carbon::parse($event->dateHeure)->translatedFormat('Y-m-d') }}"
                                             class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
                                     </div>
-                                    {{-- <div>
-                                        <label for="time" class="block text-sm font-medium text-[var(--text)] mb-2">
-                                            Heure
-                                        </label>
-                                        <input type="time" id="time" name="time"
-                                            value="{{ \Carbon\Carbon::parse($event->dateHeure)->translatedFormat('H:i') }}"
-                                            class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                                    </div> --}}
                                 </div>
                                 @error('dateHeure')
                                     <div>
@@ -165,23 +157,6 @@
                                         <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
                                     </div>
                                 @enderror
-
-                                <!-- Statut -->
-                                {{-- <div>
-                                    <label for="status" class="block text-sm font-medium text-[var(--text)] mb-2">
-                                        Statut de l'événement
-                                    </label>
-                                    <select id="status" name="status"
-                                        class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                                        <option value="A venir">A venir</option>
-                                        <option value="Passé">Passé</option>
-                                    </select>
-                                </div>
-                                @error('status')
-                                    <div>
-                                        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
-                                    </div>
-                                @enderror --}}
 
                                 <!-- Boutons d'action -->
                                 <div class="flex gap-4 pt-4">

@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Models;
-use Illuminate\Notifications\Notifiable;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
+use Illuminate\Notifications\Notifiable;
 
 class Event extends Model
 {
@@ -36,14 +35,13 @@ class Event extends Model
     public function invitedUsers()
     {
         return $this->belongsToMany(User::class, 'event_invitations')
-                    ->withPivot('status')
-                    ->withTimestamps();
+            ->withPivot('status')
+            ->withTimestamps();
     }
 
     public function comments()
-{
-    return $this->hasMany(Comment::class);
-}
-
+    {
+        return $this->hasMany(Comment::class);
+    }
 
 }

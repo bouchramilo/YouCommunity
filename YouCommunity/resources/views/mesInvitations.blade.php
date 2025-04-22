@@ -10,23 +10,10 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg min-h-[500px]">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-
-
-
                     <!-- Main Content -->
                     <main class="flex-grow container mx-auto px-4 py-4">
                         <div class="max-w-5xl mx-auto">
-                            <!-- Header Section -->
-                            {{-- <div class="flex justify-end items-center mb-8">
-                                <div class="flex gap-4">
-                                    <select
-                                        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                                        <option value="all">Tous</option>
-                                        <option value="upcoming">À venir</option>
-                                        <option value="past">Passés</option>
-                                    </select>
-                                </div>
-                            </div> --}}
+
                             <!-- Events List -->
                             <div class="space-y-6">
 
@@ -101,8 +88,7 @@
                                                                 method="post">
                                                                 @method('POST')
                                                                 @csrf
-                                                                <input type="hidden" name="status"
-                                                                    value="declined">
+                                                                <input type="hidden" name="status" value="declined">
                                                                 <button
                                                                     class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
                                                                     <i class="fas fa-times mr-1"></i>
@@ -122,17 +108,9 @@
                                         </div>
                                     @endif
                                 @endforeach
-                                <!-- Add more events here... -->
                             </div>
-
                         </div>
-                        <!-- Pagination -->
-                        {{-- <div class="mt-8 flex justify-center">
-                            {{ $myinvitations->links() }}
-                        </div> --}}
                     </main>
-
-
                 </div>
             </div>
         </div>

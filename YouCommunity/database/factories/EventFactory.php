@@ -24,7 +24,7 @@ class EventFactory extends Factory
             'maxParticipants' => $this->faker->numberBetween(10, 100),
             'dateHeure' => Carbon::now()->addDays($this->faker->numberBetween(1, 30)),
             'lieu' => $this->faker->city(),
-            'photo' => 'photos/v9pKBIbi8GdeFranAeRT0Fg6nVEO6yiZck4eP3Sm.jpg',//$this->faker->imageUrl(640, 480, 'events'),
+            'photo' => 'photos/v9pKBIbi8GdeFranAeRT0Fg6nVEO6yiZck4eP3Sm.jpg',
             'categorie' => $this->faker->randomElement(['Sport', 'Musique', 'Technologie', 'Art']),
             'status' => $this->faker->randomElement(['A venir', 'Passé']),
             'user_id' => User::factory(),

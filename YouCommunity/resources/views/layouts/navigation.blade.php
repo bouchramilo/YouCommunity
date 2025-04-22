@@ -14,24 +14,24 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
 
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('All Events') }}
+                        {{ __('Tous les événements') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('events.myEvents')" :active="request()->routeIs('events.myEvents')">
-                        {{ __('My Events') }}
+                        {{ __('Mes événements') }}
                     </x-nav-link>
 
 
                     <x-nav-link :href="route('my.inscription')" :active="request()->routeIs('my.inscription')">
-                        {{ __('My inscriptions') }}
+                        {{ __('Mes inscriptions') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('events.create')" :active="request()->routeIs('events.create')">
-                        {{ __('Create Event') }}
+                        {{ __('Créer événement') }}
                     </x-nav-link>
-                    
+
                     <x-nav-link :href="route('my.invitation')" :active="request()->routeIs('my.invitation')">
-                        {{ __('My invitations') }}
+                        {{ __('Mes invitations') }}
                     </x-nav-link>
 
                     {{-- <x-nav-link :href="route('show.allevents')" :active="request()->routeIs('show.allevents')">

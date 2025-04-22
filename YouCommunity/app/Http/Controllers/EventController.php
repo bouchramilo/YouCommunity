@@ -24,15 +24,6 @@ class EventController extends Controller
 
     // ***********************************************************************************************************************************
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    // ***********************************************************************************************************************************
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -123,7 +114,7 @@ class EventController extends Controller
             'dateHeure' => ['required', 'date'],
             'lieu' => ['required', 'string', 'max:255'],
             'categorie' => ['required', 'string', 'max:255'],
-            // 'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
         $photoPath = $request->file('photo') ? $request->file('photo')->store('photos', 'public') : $event->photo;
@@ -136,7 +127,6 @@ class EventController extends Controller
             'lieu' => $request->lieu,
             'photo' => $photoPath,
             'categorie' => $request->categorie,
-            // 'status' => $request->status,
         ]);
 
         return redirect(route('events.myEvents', absolute: false));

@@ -91,7 +91,6 @@
                                             @endif
                                         </div>
                                     @endforeach
-                                    <!-- Add more participants here... -->
                                 </div>
 
                                 <!-- Pagination -->

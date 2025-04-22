@@ -20,57 +20,7 @@
                                     <i class="fas fa-plus mr-2"></i>Créer un événement
                                 </a>
                             </div>
-
-                            <!-- Stats Cards -->
-                            {{-- <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                                <div class="bg-white p-6 rounded-lg shadow-lg">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="text-gray-600">Total Événements</p>
-                                            <h3 class="text-2xl font-bold">12</h3>
-                                        </div>
-                                        <div class="text-[var(--primary)] text-2xl">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-white p-6 rounded-lg shadow-lg">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="text-gray-600">Total Participants</p>
-                                            <h3 class="text-2xl font-bold">487</h3>
-                                        </div>
-                                        <div class="text-[var(--primary)] text-2xl">
-                                            <i class="fas fa-users"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-white p-6 rounded-lg shadow-lg">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="text-gray-600">Événements à venir</p>
-                                            <h3 class="text-2xl font-bold">3</h3>
-                                        </div>
-                                        <div class="text-[var(--primary)] text-2xl">
-                                            <i class="fas fa-hourglass-half"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                            <!-- Filter Section -->
-                            {{-- <div class="flex gap-4 mb-6">
-                                <select
-                                    class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                                    <option value="all">Tous les événements</option>
-                                    <option value="upcoming">À venir</option>
-                                    <option value="past">Passés</option>
-                                    <option value="draft">Brouillons</option>
-                                </select>
-                                <input type="text" placeholder="Rechercher un événement..."
-                                    class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                            </div> --}}
-
+                            
                             <!-- Events List -->
                             <div class="space-y-6">
 
@@ -225,7 +175,7 @@
                                             </div>
                                         @endif
                                     @endforeach
-                                
+
 
                             </div>
 

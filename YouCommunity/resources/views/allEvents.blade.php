@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('All Events') }}
+            {{ __('Tous Les Événements') }}
         </h2>
     </x-slot>
 
@@ -10,11 +10,10 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <main class="flex-grow container mx-auto px-4 py-8">
-                        <!-- Search and Filter Section -->
                         <div class="mb-8">
                             <h1 class="text-3xl font-bold mb-6">Découvrez tous les événements</h1>
 
-                            <!-- Search Bar -->
+                            {{-- <!-- Search Bar -->
                             <div class="flex gap-4 mb-6">
                                 <div class="flex-grow relative">
                                     <input type="text" placeholder="Rechercher un événement..."
@@ -60,20 +59,20 @@
                                     <option value="lyon">Lyon</option>
                                     <option value="marseille">Marseille</option>
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <!-- Events Grid -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             @foreach ($events as $event)
                                 @if ($event->status === 'A venir')
-                                    <!-- Event Card 1 - Upcoming -->
+                                    <!-- Event Card  type 1 -  -->
                                     <a href="/detailsEvent/{{ $event->id }}" class="group">
                                         <div
                                             class="bg-white rounded-lg shadow-lg overflow-hidden transition transform hover:scale-105">
                                             <div class="relative">
-                                                <img src="{{ asset('storage/' . $event->photo) }}" alt="Concert"
-                                                    class="w-full h-48 object-cover">
+                                                <img src="{{ asset('storage/' . $event->photo) }}"
+                                                    alt="{{ $event->title }}" class="w-full h-48 object-cover">
                                                 <div
                                                     class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm">
                                                     À venir
@@ -95,7 +94,7 @@
                                         </div>
                                     </a>
                                 @elseif($event->status === 'Passé')
-                                    <!-- Event Card 2 - Past -->
+                                    <!-- Event Card  type 1 -  -->
                                     <a href="/detailsEvent/{{ $event->id }}" class="group">
                                         <div
                                             class="bg-white rounded-lg shadow-lg overflow-hidden transition transform hover:scale-105">
@@ -125,10 +124,7 @@
                                 @endif
                             @endforeach
 
-                            <!-- Add more event cards here... -->
                         </div>
-
-                        <!-- Pagination -->
                         <div class="mt-8 flex justify-center">
                             {{ $events->links() }}
                         </div>

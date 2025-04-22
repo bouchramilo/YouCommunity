@@ -33,32 +33,11 @@
                                                 <i class="fas fa-map-marker-alt mr-2 text-[var(--primary)]"></i>
                                                 {{ $event->lieu }}
                                             </span>
-                                            {{-- <span class="flex items-center">
-                                                <i class="fas fa-users mr-2 text-[var(--primary)]"></i>
-                                                {{ $users->count() }}/{{ $event->maxParticipants }} participants
-                                            </span> --}}
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Search and Filter -->
-                            {{-- <div class="mb-8">
-                                <div class="flex gap-4">
-                                    <div class="flex-grow relative">
-                                        <input type="text" placeholder="Rechercher un participant..."
-                                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                                        <i
-                                            class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                                    </div>
-                                    <select
-                                        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] outline-none">
-                                        <option value="all">Tous</option>
-                                        <option value="confirmed">Confirmés</option>
-                                        <option value="pending">En attente</option>
-                                    </select>
-                                </div>
-                            </div> --}}
 
                             <!-- Participants List -->
                             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -106,12 +85,10 @@
                                             @endif
                                         </div>
                                     @endforeach
-                                    <!-- Add more participants here... -->
                                 </div>
 
                                 <!-- Pagination -->
                                 <div class="p-4 border-t">
-                                    {{-- {{ $users->links() }} --}}
                                 </div>
                             </div>
                         </div>

@@ -14,7 +14,6 @@
                     <main class="flex-grow flex items-center justify-center px-4 py-4">
                         <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full">
                             <div class="text-center mb-8">
-                                {{-- <h1 class="text-2xl font-bold text-[var(--text)]">Créer un événement</h1> --}}
                                 <p class="text-sm text-gray-600 mt-2">Partagez votre événement avec la communauté</p>
                             </div>
 
@@ -186,7 +185,6 @@
                                     </div>
                                 @enderror
 
-                                <!-- Submit Button -->
                                 <button type="submit"
                                     class="w-full bg-[var(--primary)] text-white py-2 px-4 rounded-lg hover:bg-[var(--accent)] transition duration-300">
                                     Créer l'événement
@@ -200,7 +198,6 @@
         </div>
     </div>
     <script>
-        // Preview uploaded image
         const fileUpload = document.getElementById('file-upload');
         const preview = document.getElementById('preview');
         const previewImg = preview.querySelector('img');

@@ -25,18 +25,15 @@ class InvitationController extends Controller
         return view('inviterPage', compact('users', 'event'));
     }
 
-
-
     // ***********************************************************************************************************************************
     public function show()
     {
-        $user = Auth::user(); // Récupérer l'utilisateur connecté
+        $user = Auth::user();
         $myinvitations = $user->invitations;
         // dd( $myinvitations);
 
         return view('mesInvitations', compact('myinvitations'));
     }
-
 
     // ***********************************************************************************************************************************
     public function store(Request $request, Event $event)
@@ -49,7 +46,7 @@ class InvitationController extends Controller
             'updated_at' => now(),
         ]);
 
-        // send email 
+        // send email
         $user = User::find($request->user_id);
         $message = "Nous avons le plaisir de vous inviter à notre événement spécial '$event->title', qui se tiendra le '$event->dateHeure' au '$event->lieu'.";
         Notification::send($user, new NouvelleNotification($message));
@@ -71,14 +68,12 @@ class InvitationController extends Controller
     // ***********************************************************************************************************************************
     public function statusInv(Request $request, Event $event)
     {
-        $user = Auth::user(); // Récupérer l'utilisateur connecté
+        $user = Auth::user();
 
-        // Vérifier si l'invitation existe avant de mettre à jour
         if (!$user->invitations()->where('event_id', $event->id)->exists()) {
             return back()->with('error', "Vous n'avez pas d'invitation pour cet événement.");
         }
 
-        // Mise à jour du statut dans la table pivot
         $user->invitations()->updateExistingPivot($event->id, [
             'status' => $request->status,
         ]);
