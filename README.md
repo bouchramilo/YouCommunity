@@ -41,3 +41,19 @@ Le **Community Event Planner** est une plateforme web permettant aux utilisateur
 ## Outils et Commandes Artisan
 
 Utilisation intensive des commandes Artisan pour la génération de modèles, migrations, seeders, factories et tests avec Tinker.
+
+--- 
+
+🛠️ Technologies utilisées
+
+- Laravel (Framework PHP)
+- PHP
+- Eloquent ORM
+- MySQL (ou autre SGBD relationnel)
+- Blade (templating engine)
+- Middleware & Form Requests
+- Laravel Migrations
+- Factories & Seeders
+- Caching (Laravel Cache)
+- MVC Architecture
+- CRUD Best Practices
